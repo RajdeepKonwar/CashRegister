@@ -87,7 +87,7 @@ private:
   }
 
   //! Display readable denomination info
-  std::string displayDenomination( const Denomination &i_d );
+  std::string displayDenomination( const Denomination &i_d ) const;
 
 public:
   Till( std::ostream &out );

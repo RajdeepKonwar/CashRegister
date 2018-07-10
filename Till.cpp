@@ -79,7 +79,7 @@ double Till::totalInRegister() const {
 //              and handle various edge-cases
 // -------------------------------------------------------
 int Till::makeChange( const double &i_amountPaid,
-                              const double &i_amountOwed ) {
+                      const double &i_amountOwed ) {
   double l_change = i_amountPaid - i_amountOwed;
   std::string l_message;
 
@@ -169,7 +169,7 @@ int Till::makeChange( const double &i_amountPaid,
 // Function:    Till::DisplayDenomination
 // Purpose:     Display readable denomination info (\u00A2 is ascii for cent)
 // -------------------------------------------------------
-std::string Till::displayDenomination( const Denomination &i_d ) {
+std::string Till::displayDenomination( const Denomination &i_d ) const {
   std::string l_den;
 
   switch( i_d ) {

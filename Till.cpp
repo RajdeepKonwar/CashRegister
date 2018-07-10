@@ -84,8 +84,8 @@ int Till::makeChange( const double &i_amountPaid,
   std::string l_message;
 
   //! Transaction information (displayed on LCD for customer)
-  m_display << "\n[LCD] Amount paid: $" << i_amountPaid << std::endl;
-  m_display <<   "[LCD] Amount owed: $" << i_amountOwed << std::endl;
+  m_display << "\n[LCD] Paid: $" << i_amountPaid << std::endl;
+  m_display <<   "[LCD] Owed: $" << i_amountOwed << std::endl;
 
   //! If amount paid is less than amount owed
   if( l_change < 0.0 ) {
@@ -94,20 +94,22 @@ int Till::makeChange( const double &i_amountPaid,
     std::string l_pay = l_oss.str();
     l_message = "[LCD] Please pay $" + l_pay + " more!";
     reportError( const_cast< char * >(l_message.c_str()) );
+
     return 0;
   }
 
   //! If there is not sufficient cash left in register
   if( l_change > totalInRegister() ) {
     //! Instruction for cashier to refill register
-    std::cout << "Insufficient funds in register! Please refill..\n";
     l_message = "[LCD] Please wait for cashier to refill register. Thank you for your patience!";
     reportError( const_cast< char * >(l_message.c_str()) );
+    std::cout << "Insufficient funds in register! Please refill..\n";
+
     return -1;
   }
 
   //! Display change in dollars (displayed on LCD for customer)
-  m_display << "[LCD] Change = $" << l_change << std::endl;
+  m_display << "[LCD] Diff: $" << l_change << std::endl;
 
   //! Convert change to cents
   int l_cents = l_change * 100.0 + 0.5;
@@ -153,11 +155,13 @@ int Till::makeChange( const double &i_amountPaid,
     std::cout << "Insufficient change in register! Please refill..\n";
     l_message = "[LCD] Please wait for cashier to refill register. Thank you for your patience!";
     reportError( const_cast< char * >(l_message.c_str()) );
+
     return -1;
   }
 
   //! Amount left after each transaction (for cashier thus std::cout)
   std::cout << "Amount left in register = $" << totalInRegister() << std::endl;
+
   return 0;
 }
 
